@@ -38,8 +38,8 @@ public class OrderController {
         return orderService.addOrder(order);
     }
 
-    @PostMapping("/product")
-    public Product addProduct(@RequestBody Product product) {
-       return productService.addProduct(product);
+    @PostMapping("/{id}/product")
+    public Optional<Order> addProduct(@PathVariable Integer id, @RequestBody Product product) {
+        return productService.addProduct(id, product);
     }
 }

@@ -2,3 +2,7 @@ Java_Pro.iml
 .idea
 target
 build
+mvnw
+mvnw.cmd
+.mvn
+HELP.md
