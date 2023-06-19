@@ -18,9 +18,6 @@ public class ProductService {
     OrderService orderService;
 
 
-    public ProductService(OrderService orderService) {
-        this.orderService = orderService;
-    }
 
     public Product addProduct(Product product) {
         product.setId(random.nextInt());
