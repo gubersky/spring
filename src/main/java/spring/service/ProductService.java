@@ -15,9 +15,6 @@ public class ProductService {
 
     private final List<Product> products = new ArrayList<>();
     private final Random random = new Random();
-    OrderService orderService;
-
-
 
     public Product addProduct(Product product) {
         product.setId(random.nextInt());
