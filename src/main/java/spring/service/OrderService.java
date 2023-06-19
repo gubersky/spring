@@ -1,6 +1,7 @@
 package spring.service;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import spring.model.Order;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class OrderService {
     private final List<Order> orders = new ArrayList<>();
     private final Random random = new Random();
     private final ProductService productService;
+
 
     public Optional<Order> getOrderById(int id) {
         return orders.stream().filter(order -> order.getId() == id).findFirst();

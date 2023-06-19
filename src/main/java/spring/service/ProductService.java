@@ -1,12 +1,11 @@
 package spring.service;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.model.Order;
 import spring.model.Product;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -14,19 +13,18 @@ import java.util.Random;
 @Service
 public class ProductService {
 
+    private final List<Product> products = new ArrayList<>();
     private final Random random = new Random();
     OrderService orderService;
 
-    @Autowired
+
     public ProductService(OrderService orderService) {
         this.orderService = orderService;
     }
 
-    public Optional<Order> addProduct(int id, Product product) {
+    public Product addProduct(Product product) {
         product.setId(random.nextInt());
-        orderService.getOrders().stream()
-                .filter(order -> order.getId() == id)
-                .map(order -> order.getProducts().add(product));
-        return orderService.getOrders().stream().filter(order -> order.getId() == id).findFirst();
+        products.add(product);
+        return product;
     }
 }
