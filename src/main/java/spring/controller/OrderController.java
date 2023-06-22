@@ -42,4 +42,9 @@ public class OrderController {
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
     }
+
+    @PostMapping("/product/{id}")
+    public Order addProductToOrder(@RequestBody Order order, @PathVariable Integer id) {
+        return orderService.addProductToOrder(order, id);
+    }
 }
