@@ -1,61 +1,32 @@
 package spring.service;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import spring.model.Order;
 import org.springframework.stereotype.Service;
-import spring.model.Product;
-
-import java.util.ArrayList;
+import spring.repository.OrderRepository;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
 
 @Data
 @Service
 public class OrderService {
 
     private final ProductService productService;
-    private final List<Order> orders = new ArrayList<>();
-    private final Random random = new Random();
+    private final OrderRepository orderRepository;
 
-    @Autowired
-    public OrderService(ProductService productService) {
+    public OrderService(OrderRepository orderRepository,ProductService productService) {
+        this.orderRepository = orderRepository;
         this.productService = productService;
     }
 
-    public Optional<Order> getOrderById(int id) {
-        return orders.stream().filter(order -> order.getId() == id).findFirst();
+    public Order getOrderById(int orderId) {
+        return orderRepository.findById(orderId);
     }
 
     public List<Order> getAllOrder() {
-        return orders;
+        return orderRepository.findAll();
     }
 
     public Order addOrder(Order order) {
-        order.setId(random.nextInt());
-        orders.add(order);
-        return order;
+        return orderRepository.save(order);
     }
-
-    public Order addProductToOrder(Order order, int productID) {
-        Product addProduct = null;
-        Order newOrder = null;
-        for (Product product : productService.getProducts()) {
-            if (product.getId() == productID) addProduct = product;
-        }
-        for (Order findOrder : orders) {
-            if (findOrder.getId() == order.getId()) {
-                if (findOrder.getProducts() == null) {
-                    List<Product> list = new ArrayList<>();
-                    list.add(addProduct);
-                    findOrder.setProducts(list);
-                }else findOrder.getProducts().add(addProduct);
-                newOrder = findOrder;
-            }
-        }
-        return newOrder;
-    }
-
 }

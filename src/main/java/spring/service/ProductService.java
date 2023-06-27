@@ -3,22 +3,34 @@ package spring.service;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import spring.model.Product;
-
-import java.util.ArrayList;
+import spring.repository.ProductRepository;
 import java.util.List;
-import java.util.Random;
-
 
 @Data
 @Service
 public class ProductService {
 
-    private final List<Product> products = new ArrayList<>();
-    private final Random random = new Random();
+    private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+
+    public Product getProductById(int productId){
+        return productRepository.findById(productId);
+    }
+
+    public List<Product> getAllProduct() {
+        return productRepository.findAll();
+    }
 
     public Product addProduct(Product product) {
-        product.setId(random.nextInt());
-        products.add(product);
-        return product;
+        return productRepository.save(product);
+    }
+
+    public Product addProductToOrder(Product product, int orderID) {
+        product.setOrder_id(orderID);
+        return productRepository.save(product);
     }
 }
