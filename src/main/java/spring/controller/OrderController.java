@@ -3,9 +3,7 @@ package spring.controller;
 import org.springframework.web.bind.annotation.*;
 import spring.model.Order;
 import spring.service.OrderService;
-import spring.service.ProductService;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/order")
@@ -13,13 +11,13 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService, ProductService productService) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
-    @GetMapping("/{id}")
-    public Order getOrder(@PathVariable Integer id) {
-        return orderService.getOrderById(id);
+    @GetMapping("/{orderId}")
+    public Order getOrder(@PathVariable Integer orderId) {
+        return orderService.getOrderById(orderId);
     }
 
     @GetMapping

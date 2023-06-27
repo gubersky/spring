@@ -18,8 +18,8 @@ public class OrderService {
         this.productService = productService;
     }
 
-    public Order getOrderById(int id) {
-        return orderRepository.findById(id);
+    public Order getOrderById(int orderId) {
+        return orderRepository.findById(orderId);
     }
 
     public List<Order> getAllOrder() {

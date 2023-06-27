@@ -2,11 +2,9 @@ package spring.service;
 
 import lombok.Data;
 import org.springframework.stereotype.Service;
-import spring.model.Order;
 import spring.model.Product;
 import spring.repository.ProductRepository;
-
-
+import java.util.List;
 
 @Data
 @Service
@@ -18,11 +16,21 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+
+    public Product getProductById(int productId){
+        return productRepository.findById(productId);
+    }
+
+    public List<Product> getAllProduct() {
+        return productRepository.findAll();
+    }
+
     public Product addProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public Order addProductToOrder(Order order, int productID) {
-        return null;
+    public Product addProductToOrder(Product product, int orderID) {
+        product.setOrder_id(orderID);
+        return productRepository.save(product);
     }
 }

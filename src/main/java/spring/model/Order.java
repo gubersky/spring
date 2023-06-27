@@ -9,7 +9,6 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serializable;
 import java.util.List;
 
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
