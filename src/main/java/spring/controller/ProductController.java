@@ -1,7 +1,7 @@
 package spring.controller;
 
 import org.springframework.web.bind.annotation.*;
-import spring.model.Product;
+import spring.entity.Product;
 import spring.service.ProductService;
 import java.util.List;
 

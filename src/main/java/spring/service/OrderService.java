@@ -1,7 +1,7 @@
 package spring.service;
 
 import lombok.Data;
-import spring.model.Order;
+import spring.entity.Order;
 import org.springframework.stereotype.Service;
 import spring.repository.OrderRepository;
 import java.util.List;

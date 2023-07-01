@@ -1,7 +1,7 @@
 package spring.controller;
 
 import org.springframework.web.bind.annotation.*;
-import spring.model.Order;
+import spring.entity.Order;
 import spring.service.OrderService;
 import java.util.List;
 

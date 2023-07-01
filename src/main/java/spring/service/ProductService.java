@@ -2,7 +2,7 @@ package spring.service;
 
 import lombok.Data;
 import org.springframework.stereotype.Service;
-import spring.model.Product;
+import spring.entity.Product;
 import spring.repository.ProductRepository;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     public Product addProductToOrder(Product product, int orderID) {
-        product.setOrder_id(orderID);
+        product.setOrderId(orderID);
         return productRepository.save(product);
     }
 }

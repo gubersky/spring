@@ -1,4 +1,4 @@
-package spring.model;
+package spring.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,18 +7,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table("orders")
-public class Order implements Serializable {
-
+@Table("products")
+public class Product implements Serializable {
     @Id
-    private Integer id;
-    private String date;
+    private int id;
+    private String name;
     private int cost;
-    private List<Product> products;
+    private int orderId;
 }
