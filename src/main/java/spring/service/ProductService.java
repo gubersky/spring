@@ -17,6 +17,11 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
 
+    public ProductService(ProductRepository productRepository, OrderRepository orderRepository) {
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
+    }
+
 //    public List<ProductDto> get(int id){
 //        return null;
 //    }

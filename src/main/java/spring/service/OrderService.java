@@ -20,6 +20,12 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
 
+    public OrderService(ProductService productService, ProductRepository productRepository, OrderRepository orderRepository) {
+        this.productService = productService;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
+    }
+
     public OrderDto get(int id) {
         return orderRepository.findById(id)
                 .map(order -> OrderConverter.toOrderDto(order, productRepository.findAllByOrderId(id)))
