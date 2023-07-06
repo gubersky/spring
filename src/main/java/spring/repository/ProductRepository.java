@@ -9,8 +9,8 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     List<Product> findAllByOrderId(int id);
-    List<Product> add(List<Product> products);
-    Product add(Product product);
+    List<Product> saveAll(List<Product> products);
+    Product save(Product product);
 
 
 }

@@ -1,6 +1,5 @@
 package spring.service;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import spring.converter.OrderConverter;
@@ -27,7 +26,7 @@ public class ProductService {
     }
 
     public OrderDto add(int orderId, ProductDto product) {
-        productRepository.add(Product.builder()
+        productRepository.save(Product.builder()
                 .name(product.getName())
                 .cost(product.getCost())
                 .orderId(orderId)

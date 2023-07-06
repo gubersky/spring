@@ -1,6 +1,5 @@
 package spring.service;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import spring.converter.OrderConverter;
 import spring.dto.OrderDto;
@@ -28,14 +27,14 @@ public class OrderService {
     }
 
     public List<OrderDto> getAll() {
-        return orderRepository.getAll()
+        return orderRepository.findAll()
                 .stream()
                 .map(order -> OrderConverter.toOrderDto(order,productRepository.findAllByOrderId(order.getId())))
                 .toList();
     }
 
     public OrderDto addOrder(OrderDto orderDto) {
-        Order order = orderRepository.add(Order.builder().date(Date.valueOf(LocalDate.now())).build());
+        Order order = orderRepository.save(Order.builder().date(Date.valueOf(LocalDate.now())).build());
         if (orderDto.getProducts() != null) {
            List<Product> products = orderDto.getProducts().stream()
                    .map(product -> Product.builder()
@@ -44,7 +43,7 @@ public class OrderService {
                            .orderId(order.getId())
                            .build())
                    .toList();
-           productRepository.add(products);
+           productRepository.saveAll(products);
         }
         return orderRepository.findById(order.getId())
                 .map(o -> OrderConverter.toOrderDto(o, productRepository.findAllByOrderId(order.getId())))
