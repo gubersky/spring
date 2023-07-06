@@ -11,7 +11,11 @@ import java.util.Optional;
 public interface OrderRepository extends CrudRepository<Order, Integer> {
 
     Optional<Order> findById(int id);
+
+    @Override
     List<Order> findAll();
+
+    @Override
     Order save(Order order);
 
 }
