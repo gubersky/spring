@@ -9,7 +9,10 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     List<Product> findAllByOrderId(int id);
-    List<Product> saveAll(List<Product> products);
+
+    @Override
+    <S extends Product> Iterable<S> saveAll(Iterable<S> entities);
+
     Product save(Product product);
 
 
