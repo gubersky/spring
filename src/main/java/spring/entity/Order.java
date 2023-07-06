@@ -18,5 +18,4 @@ public class Order implements Serializable {
     @Id
     private int id;
     private Date date;
-    private int cost;
 }

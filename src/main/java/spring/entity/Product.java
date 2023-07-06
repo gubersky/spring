@@ -17,6 +17,6 @@ public class Product implements Serializable {
     @Id
     private int id;
     private String name;
-    private int cost;
+    private double cost;
     private int orderId;
 }

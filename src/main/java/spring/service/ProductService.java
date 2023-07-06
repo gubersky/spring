@@ -1,36 +1,40 @@
 package spring.service;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import spring.converter.OrderConverter;
+import spring.dto.OrderDto;
+import spring.dto.ProductDto;
 import spring.entity.Product;
+import spring.repository.OrderRepository;
 import spring.repository.ProductRepository;
 import java.util.List;
 
+@AllArgsConstructor
 @Data
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public List<ProductDto> get(int id){
+        return null;
     }
 
-
-    public Product getProductById(int productId){
-        return productRepository.findById(productId);
+    public List<Product> getAll() {
+        return null ;
     }
 
-    public List<Product> getAllProduct() {
-        return productRepository.findAll();
-    }
-
-    public Product addProduct(Product product) {
-        return productRepository.save(product);
-    }
-
-    public Product addProductToOrder(Product product, int orderID) {
-        product.setOrderId(orderID);
-        return productRepository.save(product);
+    public OrderDto add(int orderId, ProductDto product) {
+        productRepository.add(Product.builder()
+                .name(product.getName())
+                .cost(product.getCost())
+                .orderId(orderId)
+                .build());
+        return orderRepository.findById(orderId)
+                .map(o -> OrderConverter.toOrderDto(o, productRepository.findAllByOrderId(orderId)))
+                .orElseThrow();
     }
 }

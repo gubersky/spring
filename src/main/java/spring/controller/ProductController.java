@@ -1,37 +1,32 @@
 package spring.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import spring.entity.Product;
+import spring.dto.OrderDto;
+import spring.dto.ProductDto;
 import spring.service.ProductService;
+
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @GetMapping("/{productId}")
-    public Product getProduct(@PathVariable Integer productId) {
-        return productService.getProductById(productId);
+    @GetMapping("/{id}")
+    public ProductDto get(@PathVariable int id) {
+        return null;
     }
 
     @GetMapping
-    public List<Product> getAllProduct() {
-        return productService.getAllProduct();
+    public List<ProductDto> getAll() {
+        return null;
     }
 
-    @PostMapping
-    public Product addProduct(@RequestBody Product product) {
-        return productService.addProduct(product);
-    }
-
-    @PostMapping("/order/{orderId}")
-    public Product addProductToOrder(@RequestBody Product product, @PathVariable Integer orderId) {
-        return productService.addProductToOrder(product, orderId);
+    @PostMapping("/{id}")
+    public OrderDto add(@PathVariable int id, @RequestBody ProductDto productDto) {
+        return productService.add(id, productDto);
     }
 }

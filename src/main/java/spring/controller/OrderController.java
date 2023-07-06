@@ -1,32 +1,30 @@
 package spring.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import spring.entity.Order;
+import spring.dto.OrderDto;
 import spring.service.OrderService;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
-    @GetMapping("/{orderId}")
-    public Order getOrder(@PathVariable Integer orderId) {
-        return orderService.getOrderById(orderId);
+    @GetMapping("/{id}")
+    public OrderDto get(@PathVariable int id) {
+        return orderService.get(id);
     }
 
     @GetMapping
-    public List<Order> getAllOrder() {
-        return orderService.getAllOrder();
+    public List<OrderDto> getAll() {
+        return orderService.getAll();
     }
 
     @PostMapping
-    public Order addOrder(@RequestBody Order order) {
-        return orderService.addOrder(order);
+    public OrderDto add(@RequestBody OrderDto orderDto) {
+        return orderService.addOrder(orderDto);
     }
 }
