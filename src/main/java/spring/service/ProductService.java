@@ -17,13 +17,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
 
-    public List<ProductDto> get(int id){
-        return null;
-    }
-
-    public List<Product> getAll() {
-        return null ;
-    }
+//    public List<ProductDto> get(int id){
+//        return null;
+//    }
+//
+//    public List<Product> getAll() {
+//        return null ;
+//    }
 
     public OrderDto add(int orderId, ProductDto product) {
         productRepository.save(Product.builder()

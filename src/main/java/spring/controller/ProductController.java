@@ -18,15 +18,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/{id}")
-    public ProductDto get(@PathVariable int id) {
-        return null;
-    }
-
-    @GetMapping
-    public List<ProductDto> getAll() {
-        return null;
-    }
+//    @GetMapping("/{id}")
+//    public ProductDto get(@PathVariable int id) {
+//        return null;
+//    }
+//
+//    @GetMapping
+//    public List<ProductDto> getAll() {
+//        return null;
+//    }
 
     @PostMapping("/{id}")
     public OrderDto add(@PathVariable int id, @RequestBody ProductDto productDto) {
