@@ -11,7 +11,6 @@ import spring.repository.OrderRepository;
 import spring.repository.ProductRepository;
 import java.util.List;
 
-@AllArgsConstructor
 @Data
 @Service
 public class ProductService {

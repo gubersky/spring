@@ -1,6 +1,5 @@
 package spring.controller;
 
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import spring.dto.OrderDto;
 import spring.dto.ProductDto;
@@ -8,12 +7,16 @@ import spring.service.ProductService;
 
 import java.util.List;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/{id}")
     public ProductDto get(@PathVariable int id) {
