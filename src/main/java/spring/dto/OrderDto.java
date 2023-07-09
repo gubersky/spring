@@ -1,4 +1,5 @@
 package spring.dto;
+
 import lombok.Builder;
 import lombok.Data;
 import java.sql.Date;
