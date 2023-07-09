@@ -30,6 +30,6 @@ public class ProductController {
 
     @PostMapping("/{id}")
     public OrderDto add(@PathVariable int id, @RequestBody ProductDto productDto) {
-        return productService.add(id, productDto);
+        return productService.addProduct(id, productDto);
     }
 }

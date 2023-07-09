@@ -30,7 +30,7 @@ public class ProductService {
         return null ;
     }
 
-    public OrderDto add(int orderId, ProductDto product) {
+    public OrderDto addProduct(int orderId, ProductDto product) {
         productRepository.save(Product.builder()
                 .name(product.getName())
                 .cost(product.getCost())

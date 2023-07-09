@@ -16,12 +16,10 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    private final ProductService productService;
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
 
-    public OrderService(ProductService productService, ProductRepository productRepository, OrderRepository orderRepository) {
-        this.productService = productService;
+    public OrderService(ProductRepository productRepository, OrderRepository orderRepository) {
         this.productRepository = productRepository;
         this.orderRepository = orderRepository;
     }
