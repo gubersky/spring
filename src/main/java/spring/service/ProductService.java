@@ -23,11 +23,23 @@ public class ProductService {
     }
 
     public List<ProductDto> get(int id){
-        return null;
+        return productRepository.findAllByOrderId(id).stream()
+                .map(product -> ProductDto.builder()
+                        .id(product.getId())
+                        .cost(product.getCost())
+                        .name(product.getName())
+                        .build())
+                .toList();
     }
 
-    public List<Product> getAll() {
-        return null ;
+    public List<ProductDto> getAll() {
+        return productRepository.findAll().stream()
+                .map(product -> ProductDto.builder()
+                        .id(product.getId())
+                        .cost(product.getCost())
+                        .name(product.getName())
+                        .build())
+                .toList();
     }
 
     public OrderDto addProduct(int orderId, ProductDto product) {

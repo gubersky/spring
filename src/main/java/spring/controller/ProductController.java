@@ -17,13 +17,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDto get(@PathVariable int id) {
-        return null;
+    public  List<ProductDto> get(@PathVariable int id) {
+        return productService.get(id);
     }
 
     @GetMapping
     public List<ProductDto> getAll() {
-        return null;
+        return productService.getAll();
     }
 
     @PostMapping("/{id}")
