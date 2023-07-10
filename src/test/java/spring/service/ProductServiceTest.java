@@ -10,12 +10,10 @@ import spring.entity.Order;
 import spring.entity.Product;
 import spring.repository.OrderRepository;
 import spring.repository.ProductRepository;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +22,6 @@ public class ProductServiceTest {
     private ProductService productService;
     private ProductRepository productRepository;
     private OrderRepository orderRepository;
-
 
     @BeforeEach
     public void setUp() {
@@ -47,5 +44,6 @@ public class ProductServiceTest {
 
         OrderDto result = productService.addProduct(orderId, productDto.get(0));
         Assertions.assertEquals(5, result.getCost());
+        Assertions.assertEquals(orderId, result.getId());
     }
 }

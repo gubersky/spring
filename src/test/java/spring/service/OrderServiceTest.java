@@ -46,9 +46,9 @@ public class OrderServiceTest {
         when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
         when(productRepository.findAllByOrderId(anyInt())).thenReturn(products);
 
-        OrderDto orderDto = orderService.get(orderId);
-        Assertions.assertEquals(30, orderDto.getCost());
-
+        OrderDto result = orderService.get(orderId);
+        Assertions.assertEquals(30, result.getCost());
+        Assertions.assertEquals(orderId, result.getId());
     }
 
     @Test
@@ -77,7 +77,6 @@ public class OrderServiceTest {
         Assertions.assertEquals(25, result.get(0).getCost());
         Assertions.assertEquals(15, result.get(1).getCost());
         Assertions.assertEquals(0, result.get(2).getCost());
-
     }
 
     @Test
@@ -96,17 +95,17 @@ public class OrderServiceTest {
                 ProductDto.builder().id(3).name("Wrap").cost(5).build()
         );
 
-        Order order = Order.builder().id(orderId).date(Date.valueOf(LocalDate.now())).build();
+        Order orderToSave = Order.builder().date(Date.valueOf(LocalDate.now())).build();
+        Order orderToReturn = Order.builder().id(orderId).date(Date.valueOf(LocalDate.now())).build();
         OrderDto orderDto = OrderDto.builder().products(productsDto).build();
 
-        when(orderRepository.save(order)).thenReturn(order);
+        when(orderRepository.save(orderToSave)).thenReturn(orderToReturn);
         when(productRepository.saveAll(products)).thenReturn(products);
-        when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+        when(orderRepository.findById(orderId)).thenReturn(Optional.of(orderToReturn));
         when(productRepository.findAllByOrderId(orderId)).thenReturn(products);
 
-
         OrderDto result = orderService.addOrder(orderDto);
-        Assertions.assertEquals(0, result.getCost());
-
+        Assertions.assertEquals(30, result.getCost());
+        Assertions.assertEquals(orderId, result.getId());
     }
 }
