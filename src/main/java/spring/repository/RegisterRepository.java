@@ -1,4 +1,9 @@
 package spring.repository;
 
-public interface RegisterRepository {
+import org.springframework.data.repository.CrudRepository;
+import spring.entity.User;
+
+public interface RegisterRepository extends CrudRepository<User, Integer> {
+
+    User save(User user);
 }
