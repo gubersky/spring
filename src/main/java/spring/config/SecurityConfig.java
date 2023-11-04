@@ -27,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.formLogin(withDefaults())
                 .authorizeHttpRequests((auth) ->
-                        auth.requestMatchers(HttpMethod.POST, "/order")
+                        auth.requestMatchers(HttpMethod.POST, "/order","/product","/register")
                                 .hasRole("USER")
                                 .anyRequest()
                                 .authenticated());
