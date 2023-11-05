@@ -13,8 +13,9 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Table("users")
 public class User {
+
     @Id
     private int id;
-    private String name;
-    private String sureName;
+    private String userName;
+    private String password;
 }
