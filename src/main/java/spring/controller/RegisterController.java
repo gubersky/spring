@@ -1,24 +1,31 @@
 package spring.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 import spring.entity.User;
-import spring.service.RegisterService;
+import spring.repository.UserRepository;
+import spring.service.RegistrationUser;
 
 @RestController
 @RequestMapping("/register")
 public class RegisterController {
 
-    private final RegisterService registerService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    public RegisterController(RegisterService registerService) {
-        this.registerService = registerService;
+    public RegisterController(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+    }
+
+    @GetMapping
+    public String registerForm(){
+        return "register";
     }
 
     @PostMapping
-    public User save(@RequestBody User user){
-        return registerService.save(user);
+    public User save(RegistrationUser registrationUser){
+        userRepository.save(registrationUser.toUser(passwordEncoder));
+        return registrationUser.toUser(passwordEncoder);
     }
 }

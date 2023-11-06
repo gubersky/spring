@@ -6,10 +6,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import spring.entity.User;
+import spring.repository.UserRepository;
+
 import javax.sql.DataSource;
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -35,8 +38,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService users(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+    public UserDetailsService users(UserRepository userRepository) {
+        return username -> {
+            User user = userRepository.findByUserName(username);
+            if (user!= null) return user;
+            throw new UsernameNotFoundException("User " + username + " not found!");
+        };
     }
 
     @Bean
